@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Tahunan</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="laporantahunan.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-laptop-code fa-2xl"></i>
+                        </span>
+                        <span class="title">Kelompok 5</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Beranda.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-house fa-xl"></i>
+                        </span>
+                        <span class="title">Beranda</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="list aset.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-computer fa-xl"></i>
+                        </span>
+                        <span class="title">List Aset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Laporan peminjaman.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-users fa-xl"></i>
+                        </span>
+                        <span class="title">Laporan Peminjam & Aset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Laporan tahunan.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-ranking-star fa-xl"></i>
+                        </span>
+                        <span class="title">Laporan Tahunan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="feedback & evaluasi.html">
+                        <span class="icon">
+                            <i class="fa-sharp fa-solid fa-comment-dots fa-xl"></i>
+                        </span>
+                        <span class="title">Feedback & Evaluasi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Bantuan.html">
+                        <span class="icon">
+                            <i class="fa-regular fa-circle-question fa-2xl"></i>
+                        </span>
+                        <span class="title">Bantuan</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="barang rusak.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-circle-exclamation fa-2xl"></i>
+                        </span>
+                        <span class="title">Laporan unit</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <i class="fa-regular fa-arrow-right-from-bracket fa-2xl"></i>
+                        </span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+                <!-- Remaining navigation items -->
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                
+                <div class="page-header">
+                    <h1 align="center">Laporan Tahunan</h1>
+                </div>
+
+                <div class="user">
+                    <img src="logo poltek.jpeg" alt="Logo Poltek">
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="form-container">
+                    <h2>Masukkan Data Laporan</h2>
+                    <form id="reportForm">
+                        <label for="year">Tahun:</label>
+                        <input type="number" id="year" name="year" required>
+
+                        <label for="value">Nilai:</label>
+                        <input type="number" id="value" name="value" required>
+
+                        <label for="assetIncrease">Peningkatan Aset:</label>
+                        <input type="number" id="assetIncrease" name="assetIncrease" required>
+
+                        <label for="numBorrower">Jumlah Orang yang Meminjam Barang:</label>
+                        <input type="number" id="numBorrower" name="numBorrower" required>
+
+                        <label for="fundIncrease">Nominal Dana yang Meningkat:</label>
+                        <input type="number" id="fundIncrease" name="fundIncrease" required>
+
+                        <label for="significantImprovements">Peningkatan Mata Kuliah Signifikan:</label>
+                        <input type="text" id="significantImprovements" name="significantImprovements" required>
+
+                        <label for="damagedItems">Jumlah Alat yang Rusak:</label>
+                        <input type="number" id="damagedItems" name="damagedItems" required>
+
+                        <label for="lostItems">Jumlah Alat yang Hilang:</label>
+                        <input type="number" id="lostItems" name="lostItems" required>
+
+                        <button type="submit">Tambah Data</button>
+                    </form>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="annualChart"></canvas>
+                </div>
+
+                <div class="pie-chart-container">
+                    <canvas id="pieChart"></canvas>
+                </div>
+
+                <div class="history-container" id="historyContainer">
+                    <h2>Riwayat Data</h2>
+                    <table id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>Tahun</th>
+                                <th>Nilai</th>
+                                <th>Peningkatan Aset</th>
+                                <th>Jumlah Orang yang Meminjam Barang</th>
+                                <th>Nominal Dana yang Meningkat</th>
+                                <th>Peningkatan Mata Kuliah Signifikan</th>
+                                <th>Jumlah Alat yang Rusak</th>
+                                <th>Jumlah Alat yang Hilang</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <button id="showHistoryBtn">Tampilkan Riwayat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========== Scripts =========  -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="laporantahunan.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

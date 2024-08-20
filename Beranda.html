@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-laptop-code fa-2xl"></i>
+                        </span>
+                        <span class="title">Kelompok 5</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Beranda.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-house fa-xl"></i>
+                        </span>
+                        <span class="title">Beranda</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="list aset.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-computer fa-xl"></i>
+                        </span>
+                        <span class="title">List Aset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Laporan peminjaman.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-users fa-xl"></i>
+                        </span>
+                        <span class="title">Laporan Peminjam & Aset</span>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a href="Bantuan.html">
+                        <span class="icon">
+                            <i class="fa-regular fa-circle-question fa-2xl"></i>
+                        </span>
+                        <span class="title">Bantuan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="barang rusak.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-circle-exclamation fa-2xl"></i>
+                        </span>
+                        <span class="title">Laporan unit</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <i class="fa-regular fa-arrow-right-from-bracket fa-2xl"></i>
+                        </span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+
+                <div class="page-header">
+                    <h1>Beranda</h1>
+                </div>
+
+                <div class="user">
+                    <img src="logo poltek.jpeg" alt="Logo Poltek" />
+                </div>
+            </div>
+
+            <!-- ======================= Cards ================== -->
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">1,504</div>
+                        <div class="cardName">Pengunjung</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">80</div>
+                        <div class="cardName">Barang</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa-solid fa-computer"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">284</div>
+                        
+                        <div class="cardName">Komentar</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa-regular fa-comment"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">Rp.500.000</div>
+                        <div class="cardName">Pendapatan</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== Information Section ================== -->
+            <div class="info-container">
+                <div class="info-image">
+                    <img src="POLTEK.jpeg" alt="Campus Image" />
+                </div>
+                <div class="info-details">
+                    <h2>Informasi Umum Kampus</h2>
+                    <p>Nama Kampus: Politeknik Negeri XYZ</p>
+                    <p>Alamat: Jl. Pendidikan No. 123, Kota ABC, Negara DEF</p>
+                    <p>Telepon: (021) 12345678</p>
+                    <p>Email: <a href="mailto:info@poltek-xyz.ac.id">info@poltek-xyz.ac.id</a></p>
+                    <p>Website: <a href="https://www.poltek-xyz.ac.id" target="_blank">www.poltek-xyz.ac.id</a></p>
+                    <p>Deskripsi: Kampus ini dikenal dengan fasilitas modern dan berbagai program studi unggulan yang berfokus pada pengembangan keterampilan praktis dan akademis.</p>
+                </div>
+            </div>
+
+            <!-- Monthly Report Section -->
+            <div id="laporanBulanan">
+                <h2>Laporan Bulanan</h2>
+                <canvas id="barChart"></canvas>
+                <canvas id="pieChart"></canvas>
+            </div>
+
+            <div class="inspirational-center">
+                <h2>Pusat Inspirasi</h2>
+                <blockquote id="quote">
+                    <p id="quote-text">"Kutipan motivasi akan muncul di sini."</p>
+                    <footer id="quote-author">- Penulis</footer>
+                </blockquote>
+                <button onclick="getNewQuote()">Dapatkan Kutipan Baru</button>
+            </div>
+
+            <!-- Button to trigger the feedback form -->
+            <button class="feedback-btn" onclick="toggleFeedbackForm()">Feedback</button>
+
+            <!-- Floating Feedback Form -->
+            <div id="feedbackForm" class="form-floating" style="display: none;">
+                <h2>Feedback</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="feedback-name">Nama</label>
+                        <input type="text" id="feedback-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-email">Email</label>
+                        <input type="email" id="feedback-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-message">Pesan</label>
+                        <textarea id="feedback-message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit">Kirim</button>
+                    <button type="button" onclick="toggleFeedbackForm()">Tutup</button>
+                </form>
+            </div>
+
+            <!-- Button to trigger the evaluation form -->
+            <button class="evaluation-btn" onclick="toggleEvaluationForm()">Evaluasi</button>
+
+            <!-- Floating Evaluation Form -->
+            <div id="evaluationForm" class="form-floating" style="display: none;">
+                <h2>Evaluasi</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="evaluation-name">Nama</label>
+                        <input type="text" id="evaluation-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="evaluation-email">Email</label>
+                        <input type="email" id="evaluation-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="evaluation-rating">Rating</label>
+                        <select id="evaluation-rating" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="evaluation-comments">Komentar</label>
+                        <textarea id="evaluation-comments" rows="4" required></textarea>
+                    </div>
+                    <button type="submit">Kirim</button>
+                    <button type="button" onclick="toggleEvaluationForm()">Tutup</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Initialize the Pie Chart when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctxPie = document.getElementById('pieChart').getContext('2d');
+            new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: ['Peningkatan kompen Januari', 'Peningkatan kompen Februari', 'Peningkatan kompen Maret', 'Peningkatan kompen April', 'Peningkatan kompen Mei'],
+                    datasets: [{
+                        label: 'Peningkatan kompen',
+                        data: [1000000, 2000000, 350000, 400000, 550000],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                }
+            });
+
+            // Menu Toggle
+            const toggle = document.querySelector(".toggle");
+            const navigation = document.querySelector(".navigation");
+            const main = document.querySelector(".main");
+
+            if (toggle && navigation && main) {
+                toggle.onclick = function () {
+                    navigation.classList.toggle("active");
+                    main.classList.toggle("active");
+                };
+            }
+        });
+
+        // Function to toggle Feedback Form visibility
+        function toggleFeedbackForm() {
+            const form = document.getElementById('feedbackForm');
+            form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
+        }
+
+        // Function to toggle Evaluation Form visibility
+        function toggleEvaluationForm() {
+            const form = document.getElementById('evaluationForm');
+            form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
+        }
+
+        // Function to get a new motivational quote
+        function getNewQuote() {
+            const quotes = [
+                { text: "Pendidikan adalah senjata paling ampuh yang bisa digunakan untuk mengubah dunia.", author: "Nelson Mandela" },
+                { text: "Tidak ada jalan menuju kesuksesan. Kesuksesan adalah perjalanan itu sendiri.", author: "Zig Ziglar" },
+                { text: "Hidup ini 10% tentang apa yang terjadi kepada kita dan 90% tentang bagaimana kita meresponnya.", author: "Charles R. Swindoll" },
+                { text: "Jangan menunggu; waktu tidak akan pernah 'tepat'. Mulailah dari tempat Anda berdiri dan kerja dengan alat apa pun yang Anda miliki.", author: "Napoleon Hill" }
+            ];
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quote-text').textContent = `"${randomQuote.text}"`;
+            document.getElementById('quote-author').textContent = `- ${randomQuote.author}`;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Peminjaman</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="laporan.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <style>
+        /* Overlay for the modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none; /* Initially hidden */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 500px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* Close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: #333;
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group textarea,
+        .form-group select {
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-left: 20px; /* Jarak dari sidebar */
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px; /* Space below each table */
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Efek Hover untuk tabel ke-3 */
+        #reportTable3 tr:hover {
+            background-color: #f5f5f5; /* Warna latar belakang saat di-hover */
+        }
+        
+        #reportTable3 td {
+            font-size: 14px;
+            color: #333;
+        }
+
+        #reportTable3 th {
+            background-color: #181885; /* Warna latar belakang header tabel */
+            color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-laptop-code fa-2xl"></i>
+                        </span>
+                        <span class="title">Kelompok 5</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Beranda.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-house fa-xl"></i>
+                        </span>
+                        <span class="title">Beranda</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="list aset.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-computer fa-xl"></i>
+                        </span>
+                        <span class="title">List Aset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Laporan peminjaman.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-users fa-xl"></i>
+                        </span>
+                        <span class="title">Laporan Peminjam & Aset</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="Bantuan.html">
+                        <span class="icon">
+                            <i class="fa-regular fa-circle-question fa-2xl"></i>
+                        </span>
+                        <span class="title">Bantuan</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="barang rusak.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-circle-exclamation fa-2xl"></i>
+                        </span>
+                        <span class="title">Laporan unit</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <i class="fa-regular fa-arrow-right-from-bracket fa-2xl"></i>
+                        </span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                
+                <!-- Header untuk halaman Laporan Peminjaman -->
+                <div class="page-header">
+                    <h1 align="center">Laporan Peminjaman</h1>
+                </div>
+
+                <div class="user">
+                    <img src="logo poltek.jpeg" alt="User Profile Picture">
+                </div>
+            </div>
+
+            <button id="openModalBtn" class="submit-btn">Tambah Data</button>
+            
+            <!-- Tabel untuk menampilkan laporan -->
+            <div class="report-data">
+                <h2>Data Laporan Peminjam dan Aset (Perminggu)</h2>
+                <table id="reportTable1">
+                    <thead>
+                        <tr>
+                            <th>Nama Perwakilan/kelas (Dosen)</th>
+                            <th>Nama Barang</th>
+                            <th>Jumlah Barang yang Digunakan</th>
+                            <th>Tanggal Peminjaman</th>
+                            <th>Tanggal Pengembalian</th>
+                            <th>Kondisi Saat Dipinjam</th>
+                            <th>Kondisi Saat Dikembalikan</th>
+                            <th>Penjelasan Kompensasi</th>
+                            <th>Nominal Kompensasi</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample data -->
+                        <tr>
+                            <td>Kelas 1A</td>
+                            <td>Mouse</td>
+                            <td>2</td>
+                            <td>2024-08-01</td>
+                            <td>2024-08-10</td>
+                            <td>Baru</td>
+                            <td>Baik</td>
+                            <td>Tidak ada</td>
+                            <td>0</td>
+                            <td><a href="detailyunus.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>Kelas 1a</td>
+                            <td>Printer</td>
+                            <td>1</td>
+                            <td>2024-08-05</td>
+                            <td>2024-08-15</td>
+                            <td>Bekas</td>
+                            <td>Baik</td>
+                            <td>Tidak ada</td>
+                            <td>0</td>
+                            <td><a href="detailkelas1a.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+
+                        <tr>
+                            <td>kelas1b</td>
+                            <td>Computer dell</td>
+                            <td>2</td>
+                            <td>2024-08-01</td>
+                            <td>2024-08-10</td>
+                            <td>Baru</td>
+                            <td>Baik</td>
+                            <td>Dikembalikan tidak tepat waktu</td>
+                            <td>100.000</td>
+                            <td><a href="detailkelasb.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>Ketua kelas1c</td>
+                            <td>Printer</td>
+                            <td>1</td>
+                            <td>2024-08-05</td>
+                            <td>2024-08-15</td>
+                            <td>Bekas</td>
+                            <td>Rusak</td>
+                            <td>Membuat rusak unit headphone</td>
+                            <td>50.000</td>
+                            <td><a href="detailkelasc.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>kelas1d</td>
+                            <td>Printer</td>
+                            <td>1</td>
+                            <td>2024-08-05</td>
+                            <td>2024-08-15</td>
+                            <td>Baru</td>
+                            <td>Baik</td>
+                            <td>Tidak ada</td>
+                            <td>0</td>
+                            <td><a href="detailkelasd.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8">Total Kompensasi</td>
+                            <td>150.000</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+
+                
+                <h2>Data Laporan Peminjaman dan Aset (Perbulan)</h2>
+                <table id="reportTable2">
+                    <thead>
+                        <tr>
+                            <th>Nama Perwakilan/kelas (Dosen)</th>
+                            <th>Nama Barang</th>
+                            <th>Jumlah Barang yang Digunakan</th>
+                            <th>Tanggal Peminjaman</th>
+                            <th>Tanggal Pengembalian</th>
+                            <th>Kondisi Saat Dipinjam</th>
+                            <th>Kondisi Saat Dikembalikan</th>
+                            <th>Penjelasan Kompensasi</th>
+                            <th>Nominal Kompensasi</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample data -->
+                        <tr>
+                            <td>Kelas 1A</td>
+                            <td>Mouse</td>
+                            <td>2</td>
+                            <td>2024-08-01</td>
+                            <td>2024-08-10</td>
+                            <td>Baru</td>
+                            <td>Baik</td>
+                            <td>Tidak ada</td>
+                            <td>0</td>
+                            <td><a href="detailyunus.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>Kelas 1a</td>
+                            <td>Printer</td>
+                            <td>1</td>
+                            <td>2024-08-05</td>
+                            <td>2024-08-15</td>
+                            <td>Bekas</td>
+                            <td>Baik</td>
+                            <td>Tidak ada</td>
+                            <td>0</td>
+                            <td><a href="detailkelas1a.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>kelas1b</td>
+                            <td>Computer dell</td>
+                            <td>2</td>
+                            <td>2024-08-01</td>
+                            <td>2024-08-10</td>
+                            <td>Baru</td>
+                            <td>Baik</td>
+                            <td>Dikembalikan tidak tepat waktu</td>
+                            <td>100.000</td>
+                            <td><a href="detailkelasb.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>Ketua kelas1c</td>
+                            <td>Printer</td>
+                            <td>1</td>
+                            <td>2024-08-05</td>
+                            <td>2024-08-15</td>
+                            <td>Bekas</td>
+                            <td>Rusak</td>
+                            <td>Membuat rusak unit headphone</td>
+                            <td>150.000</td>
+                            <td><a href="detailkelasc.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>kelas1d</td>
+                            <td>Printer</td>
+                            <td>1</td>
+                            <td>2024-08-05</td>
+                            <td>2024-08-15</td>
+                            <td>Baru</td>
+                            <td>Baik</td>
+                            <td>Tidak ada</td>
+                            <td>0</td>
+                            <td><a href="detailkelasd.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8">Total Kompensasi</td>
+                            <td>250.000</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <h2>Data Laporan Peminjaman dan Aset (Pertahun)</h2>
+                <table id="reportTable3">
+                    <thead>
+                        <tr>
+                            <th>Nama Perwakilan/kelas (Dosen)</th>
+                            <th>Nama Barang</th>
+                            <th>Jumlah Barang yang Digunakan</th>
+                            <th>Tanggal Peminjaman</th>
+                            <th>Tanggal Pengembalian</th>
+                            <th>Kondisi Saat Dipinjam</th>
+                            <th>Kondisi Saat Dikembalikan</th>
+                            <th>Penjelasan Kompensasi</th>
+                            <th>Nominal Kompensasi</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample data -->
+                        <tr>
+                            <td>Kelas 1A</td>
+                            <td>Mouse</td>
+                            <td>2</td>
+                            <td>2024-08-01</td>
+                            <td>2024-08-10</td>
+                            <td>Baru</td>
+                            <td>Baik</td>
+                            <td>Tidak ada</td>
+                            <td>0</td>
+                            <td><a href="detailyunus.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>Kelas 1a</td>
+                            <td>Printer</td>
+                            <td>1</td>
+                            <td>2024-08-05</td>
+                            <td>2024-08-15</td>
+                            <td>Bekas</td>
+                            <td>Baik</td>
+                            <td>Tidak ada</td>
+                            <td>0</td>
+                            <td><a href="detailkelas1a.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>kelas1b</td>
+                            <td>Computer dell</td>
+                            <td>2</td>
+                            <td>2024-08-01</td>
+                            <td>2024-08-10</td>
+                            <td>Baru</td>
+                            <td>Baik</td>
+                            <td>Dikembalikan tidak tepat waktu</td>
+                            <td>100.000</td>
+                            <td><a href="detailkelasb.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>Ketua kelas1c</td>
+                            <td>Printer</td>
+                            <td>1</td>
+                            <td>2024-08-05</td>
+                            <td>2024-08-15</td>
+                            <td>Bekas</td>
+                            <td>Rusak</td>
+                            <td>Membuat rusak unit headphone</td>
+                            <td>100.000</td>
+                            <td><a href="detailkelasc.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>kelas1d</td>
+                            <td>Printer</td>
+                            <td>1</td>
+                            <td>2024-08-05</td>
+                            <td>2024-08-15</td>
+                            <td>Baru</td>
+                            <td>Baik</td>
+                            <td>Tidak ada</td>
+                            <td>0</td>
+                            <td><a href="detailkelasd.html"><i class="fa-solid fa-eye"></i></a></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8">Total Kompensasi</td>
+                            <td>200.000</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+
+
+
+            
+
+            <!-- Modal -->
+            <div id="myModal" class="modal-overlay">
+                <div class="modal-content">
+                    <button class="close-btn" id="closeModalBtn">&times;</button>
+                    <h2>Tambah Data</h2>
+                    <form id="dataForm">
+                        <div class="form-group">
+                            <label for="nama">Nama Perwakilan/kelas (Dosen)</label>
+                            <input type="text" id="nama" name="nama" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="barang">Nama Barang</label>
+                            <input type="text" id="barang" name="barang" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jumlah">Jumlah Barang yang Digunakan</label>
+                            <input type="text" id="jumlah" name="jumlah" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggalPinjam">Tanggal Peminjaman</label>
+                            <input type="date" id="tanggalPinjam" name="tanggalPinjam" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggalKembali">Tanggal Pengembalian</label>
+                            <input type="date" id="tanggalKembali" name="tanggalKembali" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="kondisiPinjam">Kondisi Saat Dipinjam</label>
+                            <input type="text" id="kondisiPinjam" name="kondisiPinjam" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="kondisiKembali">Kondisi Saat Dikembalikan</label>
+                            <input type="text" id="kondisiKembali" name="kondisiKembali" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="kompensasi">Penjelasan Kompensasi</label>
+                            <textarea id="kompensasi" name="kompensasi" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="nominal">Nominal Kompensasi</label>
+                            <input type="text" id="nominal" name="nominal" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Scripts ====== -->
+    <script>
+        // Open modal
+        document.getElementById('openModalBtn').addEventListener('click', function() {
+            document.getElementById('myModal').style.display = 'flex';
+        });
+
+        // Close modal
+        document.getElementById('closeModalBtn').addEventListener('click', function() {
+            document.getElementById('myModal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside the modal
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('myModal')) {
+                document.getElementById('myModal').style.display = 'none';
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Add code to handle form submission
+            alert('Data submitted!');
+            // Close the modal after submission
+            document.getElementById('myModal').style.display = 'none';
+        });
+
+        // Menu Toggle
+let toggle = document.querySelector(".toggle");
+let navigation = document.querySelector(".navigation");
+let main = document.querySelector(".main");
+
+if (toggle && navigation && main) {
+toggle.onclick = function () {
+  navigation.classList.toggle("active");
+  main.classList.toggle("active");
+};
+}
+    </script>
+</body>
+
+</html>

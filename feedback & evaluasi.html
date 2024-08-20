@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback & Evaluasi</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="feedback.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-laptop-code fa-2xl"></i>
+                        </span>
+                        <span class="title">Kelompok 5</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Beranda.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-house fa-xl"></i>
+                        </span>
+                        <span class="title">Beranda</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="list aset.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-computer fa-xl"></i>
+                        </span>
+                        <span class="title">List Aset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Laporan peminjaman.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-users fa-xl"></i>
+                        </span>
+                        <span class="title">Laporan Peminjam & Aset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Laporan tahunan.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-ranking-star fa-xl"></i>
+                        </span>
+                        <span class="title">Laporan Tahunan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="feedback & evaluasi.html">
+                        <span class="icon">
+                            <i class="fa-sharp fa-solid fa-comment-dots fa-xl"></i>
+                        </span>
+                        <span class="title">Feedback & Evaluasi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Bantuan.html">
+                        <span class="icon">
+                            <i class="fa-regular fa-circle-question fa-2xl"></i>
+                        </span>
+                        <span class="title">Bantuan</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="barang rusak.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-circle-exclamation fa-2xl"></i>
+                        </span>
+                        <span class="title">Laporan unit</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <i class="fa-regular fa-arrow-right-from-bracket fa-2xl"></i>
+                        </span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                
+                <div class="page-header">
+                    <h1 align="center">Feedback & Evaluasi</h1>
+                </div>
+
+                <div class="user">
+                    <img src="logo poltek.jpeg" alt="User Profile Picture">
+                </div>
+            </div>
+
+            <!-- Header untuk halaman Feedback dan Evaluasi -->
+            
+
+            <!-- ======================= Feedback Form ================== -->
+            <div class="feedback-section">
+                <div class="card">
+                    <div class="cardHeader">
+                        <h2>Evaluasi Sistem</h2>
+                    </div>
+
+                    <form id="feedbackForm">
+                        <label for="effectiveness">Seberapa efektif sistem ini?</label>
+                        <select id="effectiveness" name="effectiveness">
+                            <option value="very_effective">Sangat Efektif</option>
+                            <option value="effective">Efektif</option>
+                            <option value="neutral">Netral</option>
+                            <option value="ineffective">Tidak Efektif</option>
+                            <option value="very_ineffective">Sangat Tidak Efektif</option>
+                        </select>
+
+                        <label for="performance">Bagaimana kinerja sistem?</label>
+                        <select id="performance" name="performance">
+                            <option value="excellent">Sangat Baik</option>
+                            <option value="good">Baik</option>
+                            <option value="average">Rata-Rata</option>
+                            <option value="poor">Buruk</option>
+                            <option value="very_poor">Sangat Buruk</option>
+                        </select>
+
+                        <label for="comments">Komentar dan Saran:</label>
+                        <textarea id="comments" name="comments" rows="4" placeholder="Masukkan komentar atau saran di sini..."></textarea>
+
+                        <button type="submit">Kirim</button>
+                    </form>
+
+                    <!-- Container untuk menampilkan feedback yang telah dikirim -->
+                    <div class="feedback-list">
+                        <h3>Feedback yang Telah Dikirim:</h3>
+                        <div id="feedback-list">
+                            <!-- Feedback items akan di-render di sini -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========== Scripts =========  -->
+    <script src="feedback.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        // Ambil daftar feedback dari server
+        async function loadFeedbacks() {
+            const response = await fetch('/feedback');
+            const feedbacks = await response.json();
+            
+            const feedbackList = document.getElementById('feedback-list');
+            feedbackList.innerHTML = '';
+            feedbacks.forEach(feedback => {
+                const feedbackItem = document.createElement('div');
+                feedbackItem.className = 'feedback-item';
+                feedbackItem.innerHTML = `
+                    <h4>${feedback.title}</h4>
+                    <p>${feedback.content}</p>
+                    <button onclick="deleteFeedback(${feedback.id})">Hapus</button>
+                `;
+                feedbackList.appendChild(feedbackItem);
+            });
+        }
+      
+        // Fungsi untuk menghapus feedback
+        async function deleteFeedback(id) {
+            const response = await fetch(`/feedback/${id}`, {
+                method: 'DELETE'
+            });
+        
+            if (response.ok) {
+                alert('Feedback dihapus');
+                loadFeedbacks();
+            } else {
+                alert('Gagal menghapus feedback');
+            }
+        }
+      
+        // Muat feedback saat halaman dimuat
+        loadFeedbacks();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Barang - Monitor</title>
+    <link rel="stylesheet" href="list aset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <style>
+        /* Add your custom styles here */
+        .back-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .detail-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center; /* Center align items vertically */
+            justify-content: space-between;
+        }
+
+        .detail-info {
+            flex: 1;
+        }
+
+        .detail-info h2 {
+            margin-bottom: 20px;
+        }
+
+        .detail-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .detail-info table,
+        .detail-info th,
+        .detail-info td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .detail-info th {
+            background-color: #f2f2f2;
+        }
+
+        .detail-container img {
+            width: 200px;
+            height: auto;
+            margin-left: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            align-self: center; /* Center the image vertically */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-laptop-code fa-2xl"></i>
+                        </span>
+                        <span class="title">Kelompok 5</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Beranda.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-house fa-xl"></i>
+                        </span>
+                        <span class="title">Beranda</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="list aset.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-computer fa-xl"></i>
+                        </span>
+                        <span class="title">List Aset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Laporan peminjaman.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-users fa-xl"></i>
+                        </span>
+                        <span class="title">Laporan Peminjam & Aset</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="Bantuan.html">
+                        <span class="icon">
+                            <i class="fa-regular fa-circle-question fa-2xl"></i>
+                        </span>
+                        <span class="title">Bantuan</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="barang rusak.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-circle-exclamation fa-2xl"></i>
+                        </span>
+                        <span class="title">Laporan unit</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <i class="fa-regular fa-arrow-right-from-bracket fa-2xl"></i>
+                        </span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                
+                <!-- Header untuk halaman Laporan Peminjaman -->
+                <div class="page-header">
+                    <h1 align="center">Laporan Peminjaman</h1>
+                </div>
+
+                <div class="user">
+                    <img src="logo poltek.jpeg" alt="User Profile Picture">
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="detail-container">
+        <div class="detail-info">
+            <h2>Detail Barang - Headphone</h2>
+            <table>
+                <tr>
+                    <th>Kode Barang</th>
+                    <td>Kntd-005</td>
+                </tr>
+                <tr>
+                    <th>Nama Barang</th>
+                    <td>Headphone</td>
+                </tr>
+                <tr>
+                    <th>Lokasi Barang</th>
+                    <td>Lab 05</td>
+                </tr>
+                <tr>
+                    <th>Jumlah Barang</th>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <th>Tanggal Masuk</th>
+                    <td>2024-01-15</td>
+                </tr>
+                <tr>
+                    <th>Kondisi Barang</th>
+                    <td>Baik</td>
+                </tr>
+                
+                <tr>
+                    <th>Spesifikasi Barang</th>
+                    <td>Orientation Type: On Ear
+                        Connectivity: Bluetooth, Version 5.3
+                        Battery Life: 57 Hours
+                        Fast Charging: Yes
+                        Noise Cancellation: No
+                        Voice Assistant: Google Assistant | Siri
+                        USP: Stereo Sound, Built-in Mic
+                        Warranty: 12 Months Warranty</td>
+                </tr>
+
+                <tr>
+                    <th>Jadwal Pemeliharaan</th>
+                    <td>2024-07-20</td>
+                </tr>
+                <tr>
+                    <th>Usia Barang</th>
+                    <td>1 Tahun</td>
+                </tr>
+            </table>
+            <a href="list aset.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Kembali ke List Aset</a>
+        </div>
+
+
+        <script>
+            // Menu Toggle
+let toggle = document.querySelector(".toggle");
+let navigation = document.querySelector(".navigation");
+let main = document.querySelector(".main");
+
+if (toggle && navigation && main) {
+toggle.onclick = function () {
+  navigation.classList.toggle("active");
+  main.classList.toggle("active");
+};
+}
+
+
+        </script>
+        <img src="headphones.webp" alt="Pc dell">
+    </div>
+</body>
+
+</html>
